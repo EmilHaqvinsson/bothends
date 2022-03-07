@@ -1,0 +1,30 @@
+.parent {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(9, 1fr);
+    background: rgba(91, 91, 91, 0.75);
+}
+
+.middleFour {
+    grid-area: 1 / 2 / 1 / 9;
+    background: lightgrey;
+    padding: 1em 2em;
+}
+
+.homeBody {
+    grid-area: 2 / 2 / 2 / 9;
+    font-family: "Tahoma";
+    margin: 1em;
+    padding: 2em;
+    background: ghostwhite;
+
+}
+
+.firstWord {
+    font-weight: 100;
+    color: grey;
+}
+
+.link {
+    text-decoration: underline;
+}

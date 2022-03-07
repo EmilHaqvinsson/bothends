@@ -1,0 +1,79 @@
+.parent {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: .5em;
+    padding: 1.5em;
+    /*border: 1px solid #333;*/
+    background: url("../assets/img/backgrounds/paper-with edges.png");
+    background-position: center;
+    background-size: cover;
+    color: #1f1b16;
+}
+
+.inactiveBackground {
+    display: grid;
+    background: url("../assets/img/borders/transp_thicc-top@0.5x.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.inactive {
+    text-decoration: line-through .25em grey;
+    color: grey;
+}
+
+.title {
+    grid-area: 1 / 1 / 1 / 3;
+    margin-left: 2em;
+    font-size: 2em;
+    align-items: center;
+}
+
+.title > .dueString {
+    color: rgba(33, 33, 33, .25);
+}
+
+
+.isDone {
+    grid-area: 1 / 3 / -1 / 3;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.isDone:hover,
+.isDone:active {
+    font-size: 3em;
+    transition: all 1s ease-in-out;
+    content: 'CHECK BITCH'
+}
+
+.setDone {
+    grid-area: 1 / 1 / 1 / -1;
+    color: green;
+}
+
+.content {
+    grid-area: 2 / 1 / 2 / -1;
+    margin-block: 2em;
+    padding: 1em;
+}
+
+.footer {
+    grid-area: 3 / 1 / 3 / 3;
+    display: inline-flex;
+    margin-left: 2em;
+}
+
+.footDeadline {
+    flex: 2 1 100%;
+    place-items: center;
+}
+
+.footCreated {
+    flex: 3 2 100%;
+}
+
+.toggleIcon {
+    margin-top: 3em;
+}
