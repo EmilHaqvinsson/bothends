@@ -1,4 +1,4 @@
-import http from '../UsersApi'
+import http from '../UserApi'
 
 const getAll = () => {
     return http.get('/getAll')
@@ -12,8 +12,8 @@ const search = () => {
 //     return http.post('/user', newUser)
 // }
 
-const EditMemo = (id) => {
-    return http.put(`/edit/${ id }`)
+const toggleDone = (id) => {
+    return http.put(`/toggleDone/${ id }`)
 }
 
 // const deleteUser = (name) => {
@@ -22,7 +22,7 @@ const EditMemo = (id) => {
 
 export default {
     getAll,
-    EditMemo,
+    toggleDone,
     search
 
     // createUser,

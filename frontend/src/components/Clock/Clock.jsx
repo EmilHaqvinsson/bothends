@@ -5,7 +5,7 @@ function Clock(){
     const [date, setDate] = useState(new Date);
 
     function showClock() {
-        setDate(new Date())
+        setDate(new Date)
     }
 
     useEffect(() => {
@@ -14,10 +14,10 @@ function Clock(){
             clearInterval(timerId);
         };
     }, []);
-    const uOTArray = ['Hours', 'Minutes', 'Seconds']
-    const clockArray = date.toLocaleTimeString('sv-SV').split(':')
-    return <div className={classes.clock}>
-                    <span className={classes.bigboy}><Clock/></span>
+    // const uOTArray = ['Hours', 'Minutes', 'Seconds']
+    // const clockArray = date.toLocaleTimeString('sv-SV').split(':')
+    return <div className={classes.lookAtTheTime}>
+                    <span><Clock/></span>
                 </div>
     };
 

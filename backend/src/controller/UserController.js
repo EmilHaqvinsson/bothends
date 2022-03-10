@@ -4,7 +4,7 @@ const createMemo = (req, res) => {
     const {title, dueDate, isDone, text, assignedTo} = req.body
     const timestamp = new Date()
     const newObject = {
-        id: (userDatabase.items.length),
+        id: (userDatabase.length),
         created: timestamp.toLocaleString(),
         title: title,
         dueDate: dueDate,
@@ -12,7 +12,7 @@ const createMemo = (req, res) => {
         text: text,
         assignedTo: assignedTo
     }
-    userDatabase.items.push(newObject)
+    userDatabase.push(newObject)
     res.status(201).send(userDatabase)
 }
 
@@ -45,8 +45,8 @@ function searchForMemo(search) {
     let listOfHits = []
     let object = {}
     console.log('Checking titles..')
-    for (let i = 0; i < userDatabase.items.length; i++) {
-        curr = userDatabase.items[i]
+    for (let i = 0; i < userDatabase.length; i++) {
+        curr = userDatabase[i]
         const nowTitle = curr.title.toLowerCase()
         console.log('Does the current title ('+String(nowTitle)+') include our searchterm "'+search+'"..?', nowTitle.includes(String(search)))
         console.log('The word is '+ search +', and the title is: '+ nowTitle)
@@ -79,10 +79,10 @@ function searchForMemo(search) {
     const modifyMemo = (id) => {
     let object = 'There is no item with ID "' + id + '".'
     console.log('the ID that we want to change is: '+Number(id))
-        for (let i = 0; i < userDatabase.items.length; i++) {
-            if (id === userDatabase.items[i].id) {
-                console.log('Found our object! It is..')
-                object = userDatabase.items[i]
+        for (let i = 0; i < userDatabase.length; i++) {
+            if (id === userDatabase[i].id) {
+                const object = userDatabase[i].title
+                console.log('Found our object! It is..' + object)
 
                 if (object.isDone !== false) {
                     object.isDone = false
@@ -90,9 +90,6 @@ function searchForMemo(search) {
                     object.isDone = true;
                 }
                 console.log(object);
-            // } else {
-            //     // return object
-            // }
         }
     }}
 
@@ -102,6 +99,60 @@ function searchForMemo(search) {
         const response = modifyMemo(id)
         res.status(202).send(response)
     }
+
+    const toggleDone = (req, res) => {
+        const id = Number(req.params.id)
+        const response = actualToggle(id)
+        res.status(202).send(response)
+    }
+
+    const timeLeft = (req, res) => {
+        const rightNow = req.params.rightNow
+        const deadLine = req.params.dueDate
+        console.log('rn: '+ rightNow + '\ndL: ' + deadLine)
+        res.status(200).send(
+            calcTimeLeft(rightNow, deadLine) + ' left until ' + (deadLine.toLocaleDateString))
+
+    }
+
+    function actualToggle(id) {
+    let foundItem = {}
+        for (let i = 0; i < userDatabase.length; i++) {
+            if (id === userDatabase[i].id) {
+                foundItem = userDatabase[i]
+                console.log('Found our object! It is this one:' + JSON.stringify(foundItem))
+                if (foundItem.isDone.valueOf() === false) {
+                    foundItem.isDone = true
+                    return foundItem.isDone
+                } else {
+                    foundItem.isDone = false
+                    return foundItem.isDone
+                }
+            }
+        }
+    }
+
+    function calcTimeLeft(Current, Target) {
+        var CalcTime = Current - Target; // Current - Initiallized
+        
+      var Years = Math.floor(CalcTime / 1000 / 60 / 60 / 24 / 7 / 4 / 12);
+      CalcTime -= Years * (1000 * 60 * 60 * 24 * 7 * 4 * 12);
+      var Months = Math.floor(CalcTime / 1000 / 60 / 60 / 24 / 7 / 4);
+      CalcTime -= Months * (1000 * 60 * 60 * 24 * 7 * 4);
+      var Weeks = Math.floor(CalcTime / 1000 / 60 / 60 / 24 / 7);
+      CalcTime -= Weeks * (1000 * 60 * 60 * 24 * 7);
+      // The calculation seconds to days works properly & The calculation of weeks to years may be off slightly
+      var Days = Math.floor(CalcTime / 1000 / 60 / 60 / 24);
+      CalcTime -= Days * (1000 * 60 * 60 * 24);
+        var Hours = Math.floor(CalcTime / 1000 / 60 / 60);
+        CalcTime -= Hours * (1000 * 60 * 60);
+        var Minutes = Math.floor(CalcTime / 1000 / 60);
+        CalcTime -= Minutes * (1000 * 60);
+      var Seconds = Math.floor(CalcTime / 1000 / 60);
+
+      return (Years != 0 ? Years + ((Years == 1) ? 'year ' : 'years ') : '') + (Months != 0 ? Months + ((Months == 1) ? 'month ' : 'months ') : '') + (Weeks != 0 ? Weeks + ((Weeks == 1) ? 'week ' : 'weeks ') : '') + (Days != 0 ? Days + ((Days == 1) ? 'day ' : 'days ') : '') + (Hours != 0 ? ((Hours <= 9) ? '0' + Hours : Hours) + ((Hours == 1) ? 'hr ' : 'hrs ') : '') + (Minutes != 0 ? ((Minutes <= 9) ? '0' + Minutes : Minutes) + ((Minutes == 1) ? 'min ' : 'mins ') : '') + (Seconds != 0 ? ((Seconds <= 9) ? '0' + Seconds : Seconds) + ((Seconds == 1) ? 'sec ' : 'secs ') : '');
+}
+
 
     const removeUserByName = (name) => {
         let text = `User with name: "${name}" `
@@ -129,4 +180,6 @@ function searchForMemo(search) {
         getAll: getAll,
         updateMemo: updateMemo,
         getMemoFromSearch: getMemoFromSearch,
+        toggleDone: toggleDone,
+        timeLeft: timeLeft,
     }

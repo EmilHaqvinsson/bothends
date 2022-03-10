@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
-import RoutingPaths from '../router/RoutingPath'
+import RoutingPath from '../router/RoutingPath'
 
 const HomeView = () => {
     const navigate = useNavigate()
 
     return (
         <>
-            <Link to={RoutingPaths.homePage}><h1>Home</h1></Link>
+            <Link to={ RoutingPath.homeView }><h1>Home</h1></Link>
         </>
     );
 };

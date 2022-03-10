@@ -9,9 +9,10 @@ const routes = (app) => {
     app.get('/getAll/', UserController.getAll) //Hämta alla items som finns i databasen
     // app.get('/items/title', UserController.getItemTitles) // Hämta alla titlar som finns i databasen
     app.get('/search/:inTitle', UserController.getMemoFromSearch)
+    app.get('/timeLeft/:rightNow/:dueDate', UserController.timeLeft)
 
     // UPDATE
-    app.put('/edit/:id', UserController.updateMemo)
+    app.put('/toggleDone/:id', UserController.toggleDone)
     //
     // // DELETE
     // app.delete('/user/:name', UserController.deleteUserByName)

@@ -4,16 +4,16 @@ import { ImHappy, ImAngry } from 'react-icons/im'
 
 const Alive = () => {
     const [data, setData] = useState('')
-    const [conn, setConn] = useState('')
-
-    const checkApiStatus = () => {
-        AliveService.alive()
-            .then(response => {
-                console.log(response.data)
-                setData(response.data)
-            })
-            .catch(error => console.log(error))
-    }
+    // // const [conn, setConn] = useState('')
+    //
+    // const isAPIAlive = () => {
+    //     AliveService.alive()
+    //         .then(response => {
+    //             console.log(response.data)
+    //             setData(response.data)
+    //         })
+    //         .catch(error => console.log(error))
+    // }
 
     function displayEmoji() {
         if (data === true) {
@@ -23,28 +23,26 @@ const Alive = () => {
         }
     }
 
-    function testConnect() {
-        checkApiStatus()
-        if (data === true) {
-            console.log(conn)
-            return setConn('Connected!')
-        } else {
-            console.log(conn)
-            return setConn('Not Connected')
-        }
-    }
+    // function testConnect() {
+    //     checkApiStatus()
+    //     if (data === true) {
+    //         console.log(conn)
+    //         return setConn('Connected!')
+    //     } else {
+    //         console.log(conn)
+    //         return setConn('Not Connected')
+    //     }
+    // }
 
     return (
         <>
-            <div className={ 'fl' }>
-                    { useEffect(()=> {
-                    testConnect();
-                }, [])}
-                <div>
-                    { displayEmoji() }</div>
+            <div className={ 'fr' }>
+                {/*{ isAPIAlive() }*/}
+                { displayEmoji() }
             </div>
         </>
     )
 }
 
 export default Alive
+

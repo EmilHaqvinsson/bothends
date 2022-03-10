@@ -1,22 +1,38 @@
-import axios from 'axios'
-import useState from 'react'
-import AliveService from '../../utils/API/service/AliveService'
+import {useState} from 'react'
+import AliveService from '../../utils/api/service/AliveService'
+import {HiCheck, HiX} from 'react-icons/hi'
 
 const Alive = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState('')
 
     const isAlive = () => {
-        const app = AliveService.alive
+        AliveService.alive()
+            .then(response => {
+                console.log(response.data)
+                setData(response.data)
+            })
+            .catch(error => console.log(error))
     }
 
+    function displayStatus() {
+        const conn = isAlive()
 
+        if (!conn) {
+            return (
+                <HiCheck className={ 'dark-green'}/>
+            )
+        } else {
+            return (
+                <HiX className={ 'dark-red'}/>
+            )
+        }
+    }
 
     return (
         <>
             <h1>Alive</h1>
             <p>Sup bitches!</p>
-            {data ? <p>No connection has been made!</p>
-                : <p>We are connected.</p>}
+            <h1>{displayStatus()}</h1>
         </>
     );
 };

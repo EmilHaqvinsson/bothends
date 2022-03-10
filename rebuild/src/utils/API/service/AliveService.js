@@ -1,4 +1,4 @@
-import http from '../UserApi'
+import http from '../../UserApi'
 
 const alive = () => {
     return http.get('/')
