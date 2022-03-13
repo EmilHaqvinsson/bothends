@@ -8,6 +8,11 @@
     display: block;
 }
 
+.content {
+    margin: 2em 4em;
+    justify-self: center;
+}
+
 .pre {
     margin: 2em 4em;
 }

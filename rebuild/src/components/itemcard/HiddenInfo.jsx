@@ -5,6 +5,7 @@ import classes from '../itemcard/ItemCard.module.css'
 
 const HiddenInfo = ({title, isDone, text, created, dueDate, setAllItems}) => {
     const [isDeleted, setIsDeleted] = useState('false')
+    const [isEditMode, setIsEditMode] = useState('false')
     let hiddenClasses = [classes.footerParent]
 
     function undoDeleteItem(title) {
@@ -34,7 +35,11 @@ const HiddenInfo = ({title, isDone, text, created, dueDate, setAllItems}) => {
                 </div>
                 <div className={classes.ultraFooter}>
                     <span className={classes.fatHeader}>
-                        {isDeleted ? <div onClick={() => deleteItemWithTitle(title) }><HiTrash/></div>
+                        {isEditMode ? <div onClick={() => deleteItemWithTitle(title) }><HiTrash/></div>
+                            : <div onClick={() => undoDeleteItem(title) }><HiRewind/></div>
+                        }
+
+                        {!isDeleted ? [<div onClick={() => deleteItemWithTitle(title) }>,<HiTrash/>,</div>]
                                     : <div onClick={() => undoDeleteItem(title) }><HiRewind/></div>
                                     }
                         </span>

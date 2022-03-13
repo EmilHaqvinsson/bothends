@@ -54,7 +54,7 @@ const NewItem = () => {
     // }
 
     return (
-        <>
+        <><main className={classes.content}>
             <h1>ADD NEW ITEM</h1>
             <div class="mw9 center ph3-ns">
             <form className={ "pa4 ph5 black-80"}>
@@ -127,6 +127,7 @@ const NewItem = () => {
                 <h4>Assigned to:</h4>{assignedTo}
             </div>
             </div>
+            </main>
         </>
     );
 }

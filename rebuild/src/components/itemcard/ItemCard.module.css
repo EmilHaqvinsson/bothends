@@ -16,6 +16,11 @@
     border: 2px solid rgba(33, 33, 33, .25);
     transition: all 1s ease-out;
 }
+.inlineAss {
+    margin-left: .5em;
+    padding: 2em;
+}
+
 .footerParent {
     grid-area: 2 / 1 / -1 / -1;
     grid-template-rows: repeat(3, 1fr);
@@ -34,7 +39,7 @@
 .ultraFooter {
     grid-column-start:-1;
     display: flex;
-    place-content: end;
+    place-content: flex-end;
     margin: 0;
     padding: .5em;
 }

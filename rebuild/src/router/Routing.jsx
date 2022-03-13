@@ -3,6 +3,7 @@ import RoutingPath from './RoutingPath'
 import HomeView from '../views/HomeView'
 import GetAll from '../views/GetAll.js'
 import NewItem from '../views/NewItem'
+import EditView from '../views/EditView'
 // import SignInView from '../views/signInView/SignInView'
 // import SignedInView from '../views/SignedInView'
 
@@ -14,6 +15,7 @@ const Routing = (props) => {
                 <Route path={ RoutingPath.homeView } element={ <HomeView/> }/>
                 <Route path={ RoutingPath.getAll } element={ <GetAll/> }/>
                 <Route path={ RoutingPath.newItem } element={ <NewItem/> }/>
+                <Route path={ RoutingPath.editView } element={ <EditView/> }/>
                 {/*<Route path={ RoutingPath.signInView } element={ <SignInView/> }/>*/}
                 {/*<Route path={ RoutingPath.signedInView } element={ <SignedInView/> }/>*/}
             </Routes>

@@ -18,7 +18,7 @@ const CardList = ({ listOfItems }) => {
                               isDone={item.isDone }
                               text={item.text }
                               assignedTo={item.assignedTo }
-                              setAllItems={item.setAllItems}
+                              isEditMode={item.isEditMode}
                               />
                     )
                 })

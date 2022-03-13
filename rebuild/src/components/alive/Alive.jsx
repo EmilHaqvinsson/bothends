@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import AliveService from '../../utils/api/service/AliveService'
-import {HiCheck, HiX} from 'react-icons/hi'
+import {HiOutlineCheck, HiX} from 'react-icons/hi'
 
 const Alive = () => {
     const [data, setData] = useState('')
@@ -19,7 +19,7 @@ const Alive = () => {
 
         if (!conn) {
             return (
-                <HiCheck className={ 'dark-green'}/>
+                <><HiOutlineCheck className={ 'dark-green'}/><span className={' f5 dib v-mid'}>You're connected to the api!</span></>
             )
         } else {
             return (

@@ -1,7 +1,7 @@
-import {RiEdit2Line, RiEditBoxLine, RiEditLine, RiTodoLine} from 'react-icons/ri'
 import {BsChevronDoubleDown, BsChevronDoubleUp} from 'react-icons/bs'
-import {TiStopwatch, TiThumbsOk, TiDocumentAdd, TiInputCheckedOutline, TiInputChecked} from 'react-icons/ti'
-import {MdDoneOutline, MdDone, MdEditNote, MdEdit} from 'react-icons/md'
+import {TiStopwatch} from 'react-icons/ti'
+import {GiGoldMine} from 'react-icons/gi'
+import {MdDoneOutline, MdDone} from 'react-icons/md'
 import classes from './ItemCard.module.css'
 // import anim from '../../../src/utils/styles/animation.css'
 import {useState} from 'react'
@@ -49,13 +49,16 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, setData }
 
     return (
         <article className={getClasses()}>
-            <div onClick={() => toggleExpand()} className={classes.title}  key={id}>
+            <div onClick={() => toggleExpand()} className={classes.title} key={id}>
                 { isHidden ? <BsChevronDoubleDown className={classes.toggleIcon}/> 
                 : <BsChevronDoubleUp  className={classes.toggleIcon}/> }
                 <span className={classes.title}>
                     {title}</span>&nbsp;
-                <span className={classes.dueString}>
-                    <TiStopwatch/>&nbsp;{dueDate}</span>
+                <div className={classes.dueString}>
+                    <TiStopwatch/>&nbsp;{dueDate}
+                    <span className={classes.inlineAss}><GiGoldMine/>&nbsp;Assigned to: {assignedTo}</span>
+                </div>
+
 
                 </div>
             <div className={classes.isDone}>
@@ -69,8 +72,9 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, setData }
                         : <TiDocumentAdd className={anim.checkWrap}/>}
                 </h2> */}
             </div>
-            {expand && <HiddenInfo title={title} isDone={isTaskDone} isDeleted={isDeleted} text={text} created={created} dueDate={dueDate} assignedTo={assignedTo} setData={setData}/>}
-            {/*{console.log('item ' + title + ' has ' + getTimeleft() + ' milliseconds left until deadline.')}*/}
+            {expand && <HiddenInfo title={title} isDone={isTaskDone} isEditMode={isEditMode} text={text} created={created} dueDate={dueDate} assignedTo={assignedTo} setData={setData}/>}
+            {/*{isEditMode ? <input type={'text'}/> : {title}}*/}
+            {/*/!*{console.log('item ' + title + ' has ' + getTimeleft() + ' milliseconds left until deadline.')}*!/*/}
         </article>
     )
 }

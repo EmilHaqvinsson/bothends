@@ -1,0 +1,178 @@
+.parent {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: .5fr;
+    margin: .5em;
+    padding: 1.5em;
+    background-position: top;
+    background-size: contain;
+    background: repeating-linear-gradient(
+           45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 50px,
+    rgba(0, 0, 0, 0.3) 50px,
+    rgba(0, 0, 0, 0.3) 100px
+    );
+    border: 2px solid rgba(33, 33, 33, .25);
+    transition: all 1s ease-out;
+}
+.footerParent {
+    grid-area: 2 / 1 / -1 / -1;
+    grid-template-rows: repeat(3, 1fr);
+    margin: 0 2em;
+    padding: .5em;
+    background-position: start;
+    background-size: contain;
+    color: #1f1b16;
+    place-items: flex-start;
+    display: flex;
+    background:rgba(33, 33, 33, .15);
+    border: 1px solid #333;
+    transition: all 2s cubic-bezier(0, 0, 0, 1.49);
+}
+
+.ultraFooter {
+    grid-column-start:-1;
+    display: flex;
+    place-content: flex-end;
+    margin: 0;
+    padding: .5em;
+}
+
+.inactiveBackground {
+    background: repeating-linear-gradient(
+            22deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 100px,
+            rgba(0, 0, 0, 0.3) 100px,
+            rgba(0, 0, 0, 0.3) 200px
+    );
+    background-position: center;
+    background-size: cover;
+    border: rgba(33, 33, 33, .75) 1px solid;
+    border-style: double;
+}
+
+.inactive {
+    text-decoration: line-through .25em;
+    color: rgb(167, 167, 167);
+}
+
+.activeTask {
+    color: rgb(27, 27, 27);
+}
+
+.toggleIcon {
+    font-size: 32px;
+}
+
+.title {
+    grid-area: 1 / 1 / 1 / 3;
+    margin-left: .5em;
+    font-size: 1.5em;
+    align-items: center;
+}
+
+button {
+    border: 5px solid #333;
+}
+
+.title:hover .toggleIcon {
+    animation-timing-function: cubic-bezier(.4,1.21,.83,1.16);
+    animation: jump 1.5s infinite both;
+}
+
+.dueString {
+    color: rgba(33, 33, 33, .5);
+}
+.isDone {
+    background:rgba(0, 0, 0, 0);
+    grid-area: 1 / 3 / 1 / -1;
+    display: grid;
+    place-items: center;
+    font-size: 2em;
+    grid-template-rows: 1fr;
+    /* transition: all 1s infinite both; */
+    transition: all .5s cubic-bezier(.4,1.21,.83,1.16);
+}
+
+.isDone:hover,
+.isDone:active {
+    background: repeating-linear-gradient(
+            122deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 100px,
+            rgba(0, 0, 0, 0.3) 100px,
+            rgba(0, 0, 0, 0.3) 200px
+    );
+    color: #333;
+    border-radius: 5em;
+}
+
+.isDone:hover .setDone {
+    /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, .25); */
+    transform-style: preserve-3d;
+    animation-name: rotateIn;
+    animation-duration: .5s;
+    animation-timing-function: cubic-bezier(.4,1.21,.83,1.16);
+    animation-fill-mode: alternate-reverse;
+    animation-direction: both;
+}
+
+.setDone {
+    grid-area: 1 / 1 / 1 / -1;
+    color: rgb(27, 27, 27);
+}
+
+.trash {
+    font-size: 2em;
+    margin: 0;
+}
+
+.checkMama {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    margin: 0 .25em;
+    font-size: 1.5em;
+}
+.checked {
+    display: grid;
+    grid-area: 1 / 1 / 1 / 1;
+    color: darkgreen;
+}
+.uncheck {
+    grid-area: 1 / 1 / 1 / 1;
+    z-index: 100;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 2 1 100%;
+    padding: 1em;
+    font-size: 1.2em;
+    color:rgba(33, 33, 33, .75)
+}
+.fatHeader {
+    display: inline-flex;
+    font-size: 4em;
+    padding: 0;
+    margin: 0;
+}
+
+.footer {
+    flex: 2 1 0;
+    display: inline-flex;
+    margin-left: 2em;
+}
+@keyframes jump {
+    0% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(10px);
+    }
+}

@@ -24,4 +24,7 @@ nav {
 .itemRight {
     flex: 2 1 0;
     justify-content: center;
+    border-left: 4px dashed #333;
+    margin-left: 2em;
+    padding-left: 2em;
 }
