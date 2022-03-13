@@ -1,16 +1,21 @@
-import {BsSquare, BsChevronDoubleDown, BsChevronDoubleUp, BsCheck} from 'react-icons/bs'
-import {TiStopwatch, TiEdit, TiDocumentAdd} from 'react-icons/ti'
+import {RiEdit2Line, RiEditBoxLine, RiEditLine, RiTodoLine} from 'react-icons/ri'
+import {BsChevronDoubleDown, BsChevronDoubleUp} from 'react-icons/bs'
+import {TiStopwatch, TiThumbsOk, TiDocumentAdd, TiInputCheckedOutline, TiInputChecked} from 'react-icons/ti'
+import {MdDoneOutline, MdDone, MdEditNote, MdEdit} from 'react-icons/md'
 import classes from './ItemCard.module.css'
-import anim from '../../../src/utils/styles/animation.css'
+// import anim from '../../../src/utils/styles/animation.css'
 import {useState} from 'react'
 import HiddenInfo from './HiddenInfo'
 import UserService from '../../utils/api/service/UserService'
 
-const Card = ({ id, created, title, dueDate, isDone, text, assignedTo }) => {
+const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, setData }) => {
     const [expand, setExpand] = useState(false)
     const [isTaskDone, setIsTaskDone] = useState(isDone)
     const [isHidden, setIsHidden] = useState(true)
     const [isEditMode, setIsEditMode] = useState(false)
+    const [isDeleted, setIsDeleted] = useState('')
+    
+
     let timeLeft = Date.parse(dueDate)
     let theClasses = [classes.parent]
 
@@ -20,7 +25,7 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo }) => {
     }
 
     function toggleEdit() {
-        setExpand(previseditmodeValue => !previseditmodeValue)
+        setIsEditMode(prevIsEditModeValue => !prevIsEditModeValue)
     }
 
     function toggleDone() {
@@ -29,18 +34,6 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo }) => {
                 console.log(response.data)
                 setIsTaskDone(response.data)
             }).catch(error => console.log(error))
-    }
-
-    function getTimeleft() {
-        const rightNow = new Date()
-        const deadline = Date.parse(dueDate)
-        // console.log(timeLeft+' milliseconds left after now ('+rightNow+') was subtracted from deadLine ('+deadline+').')
-        // const doneCalc = timeLeft.toLocaleTimeString()
-        UserService.timeLeft(Date.parse(rightNow), deadline).then(response => {
-            console.log(response.data)
-            timeLeft = response.data
-        }).catch(error => {console.log(error)})
-        return timeLeft
     }
 
     function getClasses() {
@@ -56,24 +49,28 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo }) => {
 
     return (
         <article className={getClasses()}>
-            <div onClick={() => toggleExpand()} className={classes.title}>
-                { isHidden ? <BsChevronDoubleDown/> : <BsChevronDoubleUp/> }
-                <span className={classes.title}>{title}</span>&nbsp;
-                <span className={classes.dueString}><TiStopwatch/>&nbsp;{dueDate}</span>
-                <span className={classes.dueString}>{getTimeleft()}</span>
+            <div onClick={() => toggleExpand()} className={classes.title}  key={id}>
+                { isHidden ? <BsChevronDoubleDown className={classes.toggleIcon}/> 
+                : <BsChevronDoubleUp  className={classes.toggleIcon}/> }
+                <span className={classes.title}>
+                    {title}</span>&nbsp;
+                <span className={classes.dueString}>
+                    <TiStopwatch/>&nbsp;{dueDate}</span>
+
                 </div>
             <div className={classes.isDone}>
                 <h2 className={classes.setDone} onClick={() => toggleDone()}>
-                    {!isTaskDone ? <BsSquare className={anim.checkWrap}/>
-                        : <BsCheck className={anim.checkWrap}/>}
+                    <div className={classes.checkMama}>
+                    {isTaskDone ? <MdDone className={classes.checked}/>
+                        : <MdDoneOutline className={classes.unChecked}/>}</div>
                 </h2>
-                <h2 className={classes.setEdit} onClick={() => toggleEdit()}>
+                {/* <h2 className={classes.setEdit} onClick={() => toggleEdit()}>
                     {!isEditMode ? <TiEdit className={anim.checkWrap}/>
                         : <TiDocumentAdd className={anim.checkWrap}/>}
-                </h2>
+                </h2> */}
             </div>
-            {expand && <HiddenInfo isDone={isTaskDone} text={text} created={created} dueDate={dueDate}/>}
-            {console.log('item ' + title + ' has ' + getTimeleft())}
+            {expand && <HiddenInfo title={title} isDone={isTaskDone} isDeleted={isDeleted} text={text} created={created} dueDate={dueDate} assignedTo={assignedTo} setData={setData}/>}
+            {/*{console.log('item ' + title + ' has ' + getTimeleft() + ' milliseconds left until deadline.')}*/}
         </article>
     )
 }

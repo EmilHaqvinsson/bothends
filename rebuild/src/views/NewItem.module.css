@@ -5,5 +5,27 @@
 
 .icon2 {
     font-size: 3em;
-    display: none;
+    display: block;
+}
+
+.pre {
+    margin: 2em 4em;
+}
+
+button {
+    margin: 2em;
+}
+
+input:required {
+    border: solid 2px rgb(192, 175, 17);
+}
+
+input:valid {
+    border: solid 2px rgb(17, 192, 26);
+}
+
+.previewItem {
+    background: lightgray;
+    padding: 2em;
+    border-radius: .5em;
 }

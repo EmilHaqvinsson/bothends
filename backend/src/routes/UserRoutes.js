@@ -14,8 +14,8 @@ const routes = (app) => {
     // UPDATE
     app.put('/toggleDone/:id', UserController.toggleDone)
     //
-    // // DELETE
-    // app.delete('/user/:name', UserController.deleteUserByName)
+    // DELETE
+    app.delete('/deleteItem/:title', UserController.deleteItem)
 }
 
 export default {

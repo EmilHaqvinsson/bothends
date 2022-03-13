@@ -23,15 +23,13 @@ const Alive = () => {
             )
         } else {
             return (
-                <HiX className={ 'dark-red'}/>
+                <HiX className={ 'dark-red' }/>
             )
         }
     }
 
     return (
         <>
-            <h1>Alive</h1>
-            <p>Sup bitches!</p>
             <h1>{displayStatus()}</h1>
         </>
     );

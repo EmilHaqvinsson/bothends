@@ -2,11 +2,12 @@ import ItemCard from '../itemcard/ItemCard'
 
 const CardList = ({ listOfItems }) => {
     console.log(listOfItems)
+    if (listOfItems.length ===  0) {
+        return (<h1>No items at all in the list :(</h1>)}
     return (
         <>
             {
                 listOfItems.map((item, index) => {
-                    console.log(listOfItems)
                     return (
                         <ItemCard className={ 'bgGray' }
                               key={ index }
@@ -16,7 +17,9 @@ const CardList = ({ listOfItems }) => {
                               dueDate={item.dueDate }
                               isDone={item.isDone }
                               text={item.text }
-                              assignedTo={item.assignedTo }/>
+                              assignedTo={item.assignedTo }
+                              setAllItems={item.setAllItems}
+                              />
                     )
                 })
             }

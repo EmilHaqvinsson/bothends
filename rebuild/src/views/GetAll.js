@@ -9,20 +9,19 @@ const GetAll = () => {
         UserService.getAll()
             .then(response => {
                 const theTodos = response.data
-                console.log(theTodos)
+                // console.log(theTodos)
                 setAllItems(theTodos)
             })
             .catch(error => console.log(error))
     }
 
-    const once = useEffect(() => {
+    useEffect(() => {
         getItems();
     }, []);
 
     return (
         <>
-            <h1 className={' pa2 ml4'}>All of the items on your list</h1>
-            {once}
+            <h1 className={' pa2 ml4'}>All items</h1>
             <CardList listOfItems={ allItems } className={'flex'}/>
         </>
     );

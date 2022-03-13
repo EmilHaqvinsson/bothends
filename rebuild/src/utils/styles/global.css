@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Fira Code';
-    src: url(./fonts/FiraCode-Light.ttf), url(./fonts/FiraCode-SemiBold.ttf);
+    src: url(./fonts/FiraCode-Light.ttf);
 }
 /* latin-ext */
 @font-face {
@@ -48,3 +48,11 @@ nav > a {
     text-decoration: none;
 }
 
+h1, h2, h3, h4 {
+    margin: 0em 2em;
+}
+
+.fatTitle {
+    font-size: 2.5em;
+    font-family: serif;
+}
