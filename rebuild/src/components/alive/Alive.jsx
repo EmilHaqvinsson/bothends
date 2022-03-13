@@ -27,7 +27,7 @@ const Alive = () => {
             )
         }
     }
-
+console.log(data)
     return (
         <>
             <h1>{displayStatus()}</h1>

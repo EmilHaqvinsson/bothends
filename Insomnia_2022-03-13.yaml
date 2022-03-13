@@ -1,0 +1,249 @@
+_type: export
+__export_format: 4
+__export_date: 2022-03-13T22:26:35.715Z
+__export_source: insomnia.desktop.app:v2022.1.1
+resources:
+  - _id: req_59116c2910b74e47a949e463ccf38991
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1645153711750
+    created: 1645153703776
+    url: localhost:29300/
+    name: isApiAlive?
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1645153703776
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    parentId: null
+    modified: 1645153664078
+    created: 1645153664078
+    name: WEBSRVPRG001
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_cf8e6d7c86c5495389d99799fe08e90e
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1647198872694
+    created: 1645153729842
+    url: localhost:29300/getAll
+    name: allUserMemos
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644858312849.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d936b7de240f4a55bd49d0363d5d3f3f
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1646927319764
+    created: 1645158125318
+    url: localhost:29300/search/fixa
+    name: search/:search
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644710617386.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_933f1e4be8ad4c2093805502690cd554
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1647157203376
+    created: 1646927336816
+    url: localhost:29300/timeLeft/20220301/20220501
+    name: timeLeft/:dueDate
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644692155453.3438
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_36f59226122246a796e3cb7d1c8f590c
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1647208039041
+    created: 1645160351234
+    url: localhost:29300/newMemo
+    name: /addMemo
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        			"title": "Fixa formulären åt Gullbringa Intressenter",
+        			"dueDate": "2022-06-28 23:59:59",
+        			"isDone": false,
+        			"text": "Föreningen behöver hjälp med att uppdatera formulär på hemsidan. Kolla över lite design-saker samtidigt. ",
+        			"assignedTo": "Me"
+        		}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644673693520.4375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_356b0a515ec54fd5a1ef907d9611973d
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1647204755156
+    created: 1646637392049
+    url: localhost:29300/newMemo
+    name: /addMemo2
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        			"title": "Ordna med Fiverr-konto (t.ex)",
+        			"dueDate": "2022-03-31, 23:59:59",
+        			"isDone": false,
+        			"text": "Skapa användare/kolla upp mer hur Swish-api funkar. Dra in lite sidokosing!",
+        			"assignedTo": "Me"
+        		}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644655231587.5312
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4f3d26b7ab904615b7ce8d799521172d
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1647204739282
+    created: 1645158230795
+    url: localhost:29300/toggleDone/0
+    name: /update/id
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644636769654.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1ed099d0de3848d59561b1d7fcae353d
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1647157599659
+    created: 1647152118638
+    url: localhost:29300/deleteItem/4
+    name: /deleteItem/id
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644599845788.8125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_f30833c54ac6d5ad5918557b3413d5daee4134bf
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1645153673316
+    created: 1645153664083
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1645153664083
+    _type: environment
+  - _id: jar_f30833c54ac6d5ad5918557b3413d5daee4134bf
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1645153664105
+    created: 1645153664105
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_9f9b8077b6c24144895bb09047fdc10b
+    parentId: wrk_c638b218bfde4ad2ab4045ddcbd09a28
+    modified: 1645153664080
+    created: 1645153664080
+    fileName: WEBSRVPRG001
+    contents: ""
+    contentType: yaml
+    _type: api_spec
