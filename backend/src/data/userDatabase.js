@@ -1,10 +1,9 @@
-const userDatabase = {
-    items: [
+const userDatabase = [
         {
             id: 0,
             created: "2022-02-01 10:18:57",
             title: 'Fixa svensexa',
-            dueDate: '2022-03-01 01:59:59',
+            dueDate: '2022-04-01 01:59:59',
             isDone: false,
             text: 'En exempeltext som beskriver mer detaljerat vad som ska göras för att kunna markera "tasken" som färdig.',
             assignedTo: 'Me'
@@ -22,7 +21,7 @@ const userDatabase = {
             id: 2,
             created: "2022-01-08 05:01:22",
             title: 'Middag med faster Ann',
-            dueDate: '2022-03-01 23:59:59',
+            dueDate: '2022-05-01 23:59:59',
             isDone: false,
             text: 'En exempeltext som beskriver mer detaljerat vad som ska göras för att kunna markera "tasken" som färdig.',
             assignedTo: 'Me'
@@ -37,6 +36,5 @@ const userDatabase = {
             assignedTo: "Me"
         }
     ]
-}
 
 export default userDatabase

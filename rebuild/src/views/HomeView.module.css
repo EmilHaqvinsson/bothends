@@ -1,0 +1,15 @@
+.content {
+    margin: 2em;
+    padding: .5em;
+    font-size: 1.25em;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchBar {
+    flex: 2 0 100%;
+}
+
+.list {
+    flex: 2 0 100%;
+}
