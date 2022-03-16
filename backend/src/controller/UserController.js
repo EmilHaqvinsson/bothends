@@ -1,10 +1,16 @@
 import userDatabase from '../data/userDatabase.js'
 
+function timestampToId(timestamp) {
+    const toID = Math.floor((Math.random() * timestamp) / 1000)
+    return Number(String(toID).substring(0,6))
+}
+
 const createMemo = (req, res) => {
     const { title, dueDate, text, assignedTo } = req.body
+    console.log(req.body)
     const timestamp = new Date()
     const newObject = {
-        id: (userDatabase.length),
+        id: (timestampToId(timestamp)),
         created: timestamp.toLocaleString('sv-SE'),
         title: title,
         dueDate: dueDate,
@@ -110,13 +116,14 @@ function actualToggle(id) {
     let foundItem = {}
     for (let i = 0; i < userDatabase.length; i++) {
         if (id === userDatabase[i].id) {
+            console.log('Finding item to update...')
             foundItem = userDatabase[i]
-            console.log('Found our object! It is this one:' + JSON.stringify(foundItem))
             if (foundItem.isDone.valueOf() === false) {
                 foundItem.isDone = true
             } else {
                 foundItem.isDone = false
             }
+            console.log('Found our item! It has id ' + foundItem.id + ', and its "isDone"-value is now: ' + foundItem.isDone)
             return foundItem.isDone
         }
     }
@@ -157,7 +164,6 @@ function calcTimeLeft(Current, Target) {
     return (Years != 0 ? Years + ((Years == 1) ? 'year ' : 'years ') : '') + (Months != 0 ? Months + ((Months == 1) ? 'month ' : 'months ') : '') + (Weeks != 0 ? Weeks + ((Weeks == 1) ? 'week ' : 'weeks ') : '') + (Days != 0 ? Days + ((Days == 1) ? 'day ' : 'days ') : '') + (Hours != 0 ? ((Hours <= 9) ? '0' + Hours : Hours) + ((Hours == 1) ? 'hr ' : 'hrs ') : '') + (Minutes != 0 ? ((Minutes <= 9) ? '0' + Minutes : Minutes) + ((Minutes == 1) ? 'min ' : 'mins ') : '') + (Seconds != 0 ? ((Seconds <= 9) ? '0' + Seconds : Seconds) + ((Seconds == 1) ? 'sec ' : 'secs ') : '');
 }
 
-
 const deleteItemById = (id) => {
     let text = `The item with id: ${id} `
 
@@ -175,16 +181,18 @@ const deleteItemById = (id) => {
 }
 
 function deleteItemByTitle(title) {
-    console.log('trying to find item with title that\'s matching "' + title + '"')
+    console.log('Trying to find item with title that\'s matching "' + title + '"')
     for (let i = 0; i < userDatabase.length; i++) {
         const cur = userDatabase[i]
         if (cur.title === String(title)) {
-            console.log(`Found item /w id ${cur.id}: ${cur.title}. Removing..`)
+            console.log(`Found item! It has id ${cur.id}, and title: ${cur.title}. Removing..`)
             const newDb = userDatabase.splice(i, 1)
+            console.log(newDb)
             return userDatabase
         };
     }
-}
+    return console.log('Couldnt find an item with title "' + title + '"')
+} 
 
 const deleteItem = (req, res) => {
     const title = req.params.title

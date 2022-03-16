@@ -1,25 +1,31 @@
-import {HiTrash, HiRewind} from 'react-icons/hi'
-import { useState , useEffect} from 'react';
+import { HiRewind,  HiOutlineTrash, HiOutlinePencilAlt } from 'react-icons/hi'
+import { useState } from 'react';
 import UserService from '../../utils/api/service/UserService'
 import classes from '../itemcard/ItemCard.module.css'
 
-const HiddenInfo = ({title, isDone, text, created, dueDate, setAllItems}) => {
-    const [isDeleted, setIsDeleted] = useState('false')
-    const [isEditMode, setIsEditMode] = useState('false')
+const HiddenInfo = ({title, isDone, text, created, dueDate, update, isEdit}) => {
+    console.log(update)
+    const [isDeleted, setIsDeleted] = useState(false)
+    const [data, setData] = useState([])
+
     let hiddenClasses = [classes.footerParent]
+    
 
     function undoDeleteItem(title) {
         setIsDeleted(false)
         console.log(`Unfortunately, due to the pandemic this function is still in active development :(`)
     }
 
-    function deleteItemWithTitle(title) {
-        setIsDeleted(true)
+    const deleteItemWithTitle = (title) => {
         UserService.deleteItem(title)
         .then(response => {
             console.log(response.data)
+            update(response.data)
+            setData(response.data)
         })
+        setIsDeleted(true)
     }
+
 
     if (isDone) {
         hiddenClasses = [classes.footerParent]
@@ -35,11 +41,8 @@ const HiddenInfo = ({title, isDone, text, created, dueDate, setAllItems}) => {
                 </div>
                 <div className={classes.ultraFooter}>
                     <span className={classes.fatHeader}>
-                        {isEditMode ? <div onClick={() => deleteItemWithTitle(title) }><HiTrash/></div>
-                            : <div onClick={() => undoDeleteItem(title) }><HiRewind/></div>
-                        }
-
-                        {!isDeleted ? [<div onClick={() => deleteItemWithTitle(title) }>,<HiTrash/>,</div>]
+                        {isEdit && <div onClick={() => deleteItemWithTitle(title)}><HiOutlinePencilAlt/></div>}
+                        {!isDeleted ? <div onClick={() => deleteItemWithTitle(title)}><HiOutlineTrash/></div>
                                     : <div onClick={() => undoDeleteItem(title) }><HiRewind/></div>
                                     }
                         </span>

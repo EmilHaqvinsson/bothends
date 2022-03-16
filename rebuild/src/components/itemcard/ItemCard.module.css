@@ -21,6 +21,14 @@
     padding: 2em;
 }
 
+.invisible {
+    display: none;
+}
+
+.tester {
+    color:aqua;
+}
+
 .footerParent {
     grid-area: 2 / 1 / -1 / -1;
     grid-template-rows: repeat(3, 1fr);

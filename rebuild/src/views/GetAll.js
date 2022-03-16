@@ -1,6 +1,9 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useCallback} from 'react'
 import CardList from '../components/cardList/CardList'
 import UserService from '../utils/api/service/UserService'
+import classes from './HomeView'
+
+let mounted = false
 
 const GetAll = () => {
     const [allItems, setAllItems] = useState([]);
@@ -9,21 +12,31 @@ const GetAll = () => {
         UserService.getAll()
             .then(response => {
                 const theTodos = response.data
-                // console.log(theTodos)
-                setAllItems(theTodos)
+                if (!mounted) { setAllItems(theTodos) }
             })
             .catch(error => console.log(error))
+            return () => mounted = true
     }
 
     useEffect(() => {
         getItems();
     }, []);
 
+    const parentUpdater = ( useCallback(
+        (items) => {
+        mounted = false
+        getItems()
+        console.log(allItems)
+    }, [allItems])
+    );
+    
+
     return (
-        <>
+        <div className={classes.content}>
             <h1 className={' pa2 ml4'}>All items</h1>
-            <CardList listOfItems={ allItems } className={'flex'}/>
-        </>
+            <CardList listOfItems={ allItems }
+                        update={parentUpdater} className={'flex'}/>
+        </div>
     );
 };
 

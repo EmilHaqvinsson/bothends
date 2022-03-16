@@ -15,19 +15,20 @@ const Alive = () => {
     }
 
     function displayStatus() {
-        const conn = isAlive()
+        isAlive()
+        const conn = data
 
-        if (!conn) {
+        if (conn) {
             return (
                 <><HiOutlineCheck className={ 'dark-green'}/><span className={' f5 dib v-mid'}>You're connected to the api!</span></>
             )
         } else {
             return (
-                <HiX className={ 'dark-red' }/>
+                <><HiX className={ 'dark-red' }/><span className={' f5 dib v-mid'}>Could not connect to the API</span></>
             )
         }
     }
-console.log(data)
+    
     return (
         <>
             <h1>{displayStatus()}</h1>

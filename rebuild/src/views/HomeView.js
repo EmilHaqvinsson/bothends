@@ -5,7 +5,7 @@ import CardList from '../components/cardList/CardList'
 
 const HomeView = () => {
     const [search, setSearch] = useState('')
-    const [result, setResult] = useState('')
+    const [result, setResult] = useState([])
 
     const doSearch = (search) => {
         setSearch(search)
@@ -20,13 +20,14 @@ const HomeView = () => {
         <>
             <div className={classes.content}>
                 <div className={classes.searchBar}>
-                    <input className={' w-100 '} type={'search'} onChange={(e) => {
+                    <input className={' w-50 ma2 pa2'} type={'search'} onChange={(e) => {
                         setSearch(e.target.value)
                     }} />
                     <button onClick={() => doSearch(search)}>search</button>
                 </div>
                 <div className={classes.list}>
-                    <CardList listOfItems={result} />
+                    {result ? <CardList listOfItems={result} />
+                            : 'Search for items in your database' }
                 </div>
             </div>
         </>

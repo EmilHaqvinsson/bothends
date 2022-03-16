@@ -22,18 +22,24 @@ const NewItem = () => {
     const handleChangedAssignedTo = (e)=> {
         setAssignedTo(e.target.value)
     }
-    const sendDataToApi = () => {
-        const itemToAdd = {
+
+    function makeItem() {
+         const itemToAdd = {
             'title': title,
             'dueDate': deadline,
             'text': text,
-            'Assigned to': assignedTo
+            'assignedTo': assignedTo
         }
-        UserService.add(itemToAdd)
+        return itemToAdd
+    }
+    const sendDataToApi = () => {
+        UserService.add(makeItem())
             .then(response => {
                 setData(response.data)
             })
             .catch(error => console.log(error))
+            console.log(data)
+            return data
     }
     // const exObj1 = {
     //     'title': setTitle('Fixa formulären åt Gullbringa Intressenter'),
@@ -54,9 +60,11 @@ const NewItem = () => {
     // }
 
     return (
-        <><main className={classes.content}>
+        <>
+        <main className={classes.wrapper}>
+            <div className={classes.content}>
             <h1>ADD NEW ITEM</h1>
-            <div class="mw9 center ph3-ns">
+            <div className="mw9 center ph3-ns">
             <form className={ "pa4 ph5 black-80"}>
                 <div className={ 'w-100' }>
                     <label htmlFor="title" className="f6 b db mb2 ml2">
@@ -112,22 +120,22 @@ const NewItem = () => {
                         <small id="name-desc" className="f6 black-60 db mb2">Who's task is this?</small>
                 </div>
             </form>
-            <div>
-                {/*<button onClick={() => addExItem(exObj1) }>"Example Task 01"</button>*/}
-                {/*<button onClick={() => addExItem(exObj2) }>"Example Task 02"</button>*/}
-                </div>
+            </div>
             <span className={' f4 w-100 c'}>
-                <button onClick={ sendDataToApi }>ADD Item</button></span>
+                <button onClick={sendDataToApi }>ADD Item</button></span>
+                </div>
+                </main>
+                <div className={classes.content}>
             <div className={classes.previewItem}>
-                <h5>Title of item:</h5>
-                {title}
+            {!data ? <span className={classes.icon2}>{data}</span>
+                    : null }
+                <h5>Title of item:</h5>{title}
                 <h5>Deadline:</h5>
-                    <h4>{deadline.replace('T', ', ')}</h4>
-                <h4>Description of item:</h4>{text}
-                <h4>Assigned to:</h4>{assignedTo}
+                {deadline.replace('T', ', ')}
+                <h5>Description of item:</h5>{text}
+                <h5>Assigned to:</h5>{String(assignedTo)}
             </div>
             </div>
-            </main>
         </>
     );
 }

@@ -3,23 +3,32 @@ import {TiStopwatch} from 'react-icons/ti'
 import {GiGoldMine} from 'react-icons/gi'
 import {MdDoneOutline, MdDone} from 'react-icons/md'
 import classes from './ItemCard.module.css'
-// import anim from '../../../src/utils/styles/animation.css'
 import {useState} from 'react'
 import HiddenInfo from './HiddenInfo'
 import UserService from '../../utils/api/service/UserService'
+import { HiExclamation } from 'react-icons/hi'
 
-const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update }) => {
-    console.log(update)
-    const [expand, setExpand] = useState(false)
+const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update, editMode}) => {
+    console.log('The update var is worth: \n'+ update)
+    const [expand, setExpand] = useState(true)
     const [isTaskDone, setIsTaskDone] = useState(isDone)
-    const [isHidden, setIsHidden] = useState(true)
+    const [isHidden, setIsHidden] = useState(false)
     const [isEditMode, setIsEditMode] = useState(false)
     
     let theClasses = [classes.parent]
 
+    function editCheck() {
+        setIsEditMode(previsEditModeValue => !previsEditModeValue)
+        for (let f = 0; f < Card.arguments.length; f++) {
+            const thisProp = Card.arguments[f];
+            console.log(thisProp)
+        }
+    }
+
     function toggleExpand() {
         setExpand(prevexpandValue => !prevexpandValue)
         setIsHidden(previsHiddenValue => !previsHiddenValue)
+        editCheck()
     }
 
     function toggleDone() {
@@ -30,22 +39,24 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update })
             }).catch(error => console.log(error))
     }
 
-    function getClasses() {
+    function getClasses(prop) {
         theClasses = [classes.parent]
         if (!isTaskDone) {
             theClasses.push(classes.activeTask)
             return theClasses.join(' ')
         } else if (isTaskDone) {
             theClasses.push(classes.inactive)
+            {isEditMode ? theClasses.push(classes.prop) : theClasses.push(theClasses)}
             return theClasses.join(' ')
         }
     }
 
     return (
-        <article className={getClasses()}>
+        <>
+                {isEditMode && <HiExclamation className={getClasses('tester')}/>}
             <div onClick={() => toggleExpand()} className={classes.title} key={id}>
-                { isHidden ? <BsChevronDoubleDown className={classes.toggleIcon}/> 
-                : <BsChevronDoubleUp  className={classes.toggleIcon}/> }
+                { isHidden ? <BsChevronDoubleDown className={classes.toggleIcon}/>
+                            : <BsChevronDoubleUp  className={classes.toggleIcon}/> }
                 <span className={classes.title}>
                     {title}</span>&nbsp;
                 <div className={classes.dueString}>
@@ -61,10 +72,6 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update })
                     {isTaskDone ? <MdDone className={classes.checked}/>
                         : <MdDoneOutline className={classes.unChecked}/>}</div>
                 </h2>
-                {/* <h2 className={classes.setEdit} onClick={() => toggleEdit()}>
-                    {!isEditMode ? <TiEdit className={anim.checkWrap}/>
-                        : <TiDocumentAdd className={anim.checkWrap}/>}
-                </h2> */}
             </div>
             {expand && <HiddenInfo title={title}
                                    isDone={isTaskDone}
@@ -72,12 +79,13 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update })
                                    text={text} created={created}
                                    dueDate={dueDate}
                                    assignedTo={assignedTo}
-                                   update={update}/>
+                                   update={update}
+                                   isEdit = { isEditMode } />
                                    }
             
             {/*{isEditMode ? <input type={'text'}/> : {title}}*/}
             {/*/!*{console.log('item ' + title + ' has ' + getTimeleft() + ' milliseconds left until deadline.')}*!/*/}
-        </article>
+        </>
     )
 }
 

@@ -2,11 +2,16 @@ import {useState} from "react";
 import UserService from "../utils/api/service/UserService";
 import classes from './EditView.module.css'
 import CardList from "../components/cardList/CardList";
+import { BsClock } from "react-icons/bs";
 
 function EditView() {
-    const [isEditMode, setIsEditMode] = useState(false)
+    const [isEditMode, setIsEditMode] = useState(true)
     const [search, setSearch] = useState('')
     const [result, setResult] = useState('')
+
+    const handleEditMode = (e) => {
+        setIsEditMode(!isEditMode)
+    }
     
     const doSearch = (search) => {
         setSearch(search)
@@ -19,17 +24,18 @@ function EditView() {
 
   return(
       <>
-    <div className={classes.searchBar}>
-    <input className={' w-100 '} type={'search'} onChange={(e) => {
-        setSearch(e.target.value)
-    }} />
-    <button onClick={() => doSearch(search)}>search</button>
-</div>
-<div className={classes.list}>
-    <CardList listOfItems={result} />
-</div>
-</>
+        <div className={classes.searchBar}>
+        <input className={' w-100 '} type={'search'} placeholder={'Start typing to search!'} onChange={ (e) => {
+            doSearch(e.target.value)
+        }} />
+        {search && <CardList listOfItems={ result } isEdit={ isEditMode }/> }
+        </div>
+        <div className={search ? classes.list : classes.invisible}>
+            <BsClock/>
+        </div>
+  </>
   )
 }
+
 
 export default EditView;
