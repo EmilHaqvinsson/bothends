@@ -15,7 +15,7 @@ const CardList = ({ listOfItems, update, isEdit}) => {
         listOfItems.map((item, index) => {
         return (
             <EditCard className={ 'bgGray' }
-                  key={ index }
+                  key={ item.id }
                   id={ item.id }
                   created={ item.created }
                   title={ item.title }

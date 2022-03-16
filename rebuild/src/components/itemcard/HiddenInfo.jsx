@@ -6,6 +6,7 @@ import classes from '../itemcard/ItemCard.module.css'
 const HiddenInfo = ({title, isDone, text, created, dueDate, update, isEdit}) => {
     console.log(update)
     const [isDeleted, setIsDeleted] = useState(false)
+    const [editMode, setEditMode] = useState(isEdit)
     const [data, setData] = useState([])
 
     let hiddenClasses = [classes.footerParent]
@@ -17,15 +18,21 @@ const HiddenInfo = ({title, isDone, text, created, dueDate, update, isEdit}) => 
     }
 
     const deleteItemWithTitle = (title) => {
+        console.log(`RIGHT NOW "${isDeleted}" needs to CHAAAANGE!!!!!`)
+            setIsDeleted(previsDeleted => !previsDeleted)
         UserService.deleteItem(title)
         .then(response => {
             console.log(response.data)
             update(response.data)
             setData(response.data)
-        })
-        setIsDeleted(true)
+            console.log(data)
+            setIsDeleted(false)
+        }).catch(error => console.log(error))
+    } 
+    const toggleEditMode = () => {
+        console.log(`isEdit is "${isEdit}".`)
+        setEditMode(previsEditMode => !previsEditMode)
     }
-
 
     if (isDone) {
         hiddenClasses = [classes.footerParent]
@@ -41,10 +48,9 @@ const HiddenInfo = ({title, isDone, text, created, dueDate, update, isEdit}) => 
                 </div>
                 <div className={classes.ultraFooter}>
                     <span className={classes.fatHeader}>
-                        {isEdit && <div onClick={() => deleteItemWithTitle(title)}><HiOutlinePencilAlt/></div>}
-                        {!isDeleted ? <div onClick={() => deleteItemWithTitle(title)}><HiOutlineTrash/></div>
-                                    : <div onClick={() => undoDeleteItem(title) }><HiRewind/></div>
-                                    }
+                        {!isEdit && <div onClick={() => toggleEditMode(title)}><HiOutlinePencilAlt/></div>}
+                        {console.log('RIGHT NOW isDeleted is "'+ isDeleted + '" for item "' + title + '".')}
+                        {!isDeleted && <div onClick={() => deleteItemWithTitle(title)}><HiOutlineTrash/></div>}
                         </span>
                         </div>
             </div>

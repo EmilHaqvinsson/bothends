@@ -17,7 +17,7 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update, e
     
     let theClasses = [classes.parent]
 
-    function editCheck() {
+    const editCheck = () => {
         setIsEditMode(previsEditModeValue => !previsEditModeValue)
         for (let f = 0; f < Card.arguments.length; f++) {
             const thisProp = Card.arguments[f];
@@ -46,14 +46,17 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update, e
             return theClasses.join(' ')
         } else if (isTaskDone) {
             theClasses.push(classes.inactive)
-            {isEditMode ? theClasses.push(classes.prop) : theClasses.push(theClasses)}
-            return theClasses.join(' ')
-        }
+            if (isEditMode) { 
+                theClasses.push(classes.prop) 
+            } else { 
+                theClasses.push(theClasses)
+            }
+        }return theClasses.join(' ')
     }
 
     return (
         <>
-                {isEditMode && <HiExclamation className={getClasses('tester')}/>}
+                {!isEditMode && <HiExclamation className={getClasses(classes.tester)}/>}
             <div onClick={() => toggleExpand()} className={classes.title} key={id}>
                 { isHidden ? <BsChevronDoubleDown className={classes.toggleIcon}/>
                             : <BsChevronDoubleUp  className={classes.toggleIcon}/> }

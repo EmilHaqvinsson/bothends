@@ -8,7 +8,7 @@ import {useState} from 'react'
 import HiddenInfo from './HiddenInfo'
 import UserService from '../../utils/api/service/UserService'
 
-const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update }) => {
+const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update, isEdit }) => {
     console.log(update)
     const [expand, setExpand] = useState(false)
     const [isTaskDone, setIsTaskDone] = useState(isDone)
@@ -68,7 +68,7 @@ const Card = ({ id, created, title, dueDate, isDone, text, assignedTo, update })
             </div>
             {expand && <HiddenInfo title={title}
                                    isDone={isTaskDone}
-                                   isEditMode={isEditMode}
+                                   isEdit={isEditMode}
                                    text={text} created={created}
                                    dueDate={dueDate}
                                    assignedTo={assignedTo}

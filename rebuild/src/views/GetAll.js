@@ -3,7 +3,7 @@ import CardList from '../components/cardList/CardList'
 import UserService from '../utils/api/service/UserService'
 import classes from './HomeView'
 
-let mounted = false
+let mounted = true
 
 const GetAll = () => {
     const [allItems, setAllItems] = useState([]);
@@ -12,7 +12,7 @@ const GetAll = () => {
         UserService.getAll()
             .then(response => {
                 const theTodos = response.data
-                if (!mounted) { setAllItems(theTodos) }
+                if (mounted) { setAllItems(theTodos) }
             })
             .catch(error => console.log(error))
             return () => mounted = true
@@ -24,10 +24,11 @@ const GetAll = () => {
 
     const parentUpdater = ( useCallback(
         (items) => {
-        mounted = false
-        getItems()
-        console.log(allItems)
-    }, [allItems])
+            console.log(items)
+            mounted = true
+            getItems()
+            console.log(allItems)
+        }, [allItems])
     );
     
 
