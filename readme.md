@@ -19,3 +19,11 @@ Jag har också haft enorma problem med att försöka få någon form av "edit-mo
 Det jag ville åstadkomma var att på samma sätt som man kan markera sina items som "done" genom att klicka på checkmarken på dess Card, så skulle man komma åt ett slags edit-mode genom att trycka på t.ex. en skiftnyckel (eller någon annan bra 'edit-symbol'). Jag planerade lite löst att försöka ordna det med ett slags conditional rendering - något i stil med `{!editMode ? {title} : <input type='text' placeholder={title} />` - men det visade sig vara lite för komplext för att jag skulle lyckas med det. 
 
 Jag har för avsikt att fortsätta skriva på programmet, absolut minst tills jag känner mig nöjd med det, men jag har också lite lösa planer på att försöka bygga ut den till något slags dashboard-liknande projekt.
+
+UPDATE SENT INLÄMNAT
+
+Jag lyckades knäcka min andra branch fullständigt genom att försöka fixa in Edit-lösningen i sista sekunden, så jag lämnar in denna branchen istället. Jag är 90% säker på att det är den senast commitade versionen jag har. 
+
+BUG: Om item 1 är satt till 'DONE' och man DELETE:ar itemet under ifrån frontend, så passerar item 1's isDone status över. Jag tror att jag vet i vilka regioner jag ska leta efter triggern (bland annat omkring "<article className={getClasses()}>" som händer i ItemCard.jsx). 
+
+Jag lämnar in det som det är just nu så att det iallafall är inlämnat, och så ska jag lösa buggen så fort jag kan.
